@@ -1,9 +1,9 @@
 ---
 
 galaxy_info:
-  author: EDITD devs
+  author: vvkuznetsov
   description: A role for creating supervisor tasks
-  company: EDITD
+  company:
   license: MIT
   min_ansible_version: 1.2
   platforms:
@@ -26,4 +26,3 @@ galaxy_info:
   - system
   - web
 dependencies: []
-
