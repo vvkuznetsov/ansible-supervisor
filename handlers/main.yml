@@ -1,4 +1,9 @@
 ---
+
+- name: restart supervisord
+  service: name=supervisor state=restarted
+  sudo: yes
+
 - name: update supervisord
   command: "{{ supervisorctl_command }} update {{ name }}"
   sudo: yes
