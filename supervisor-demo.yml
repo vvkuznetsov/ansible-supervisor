@@ -6,7 +6,7 @@
     - { role: ./,
         name: webserver,
         command: python -m SimpleHTTPServer,
-        directory: /opt/web,
+        directory: /tmp,
         user: root,
         stopsignal: HUP
     }
