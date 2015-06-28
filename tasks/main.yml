@@ -1,21 +1,30 @@
-- name: install supervisor
-  apt: pkg=supervisor state=present update_cache=true
-  sudo: yes
+---
 
-- name: configure supervisord
+- name: Install supervisor
+  apt: pkg=supervisor state=present update_cache=true
+  tags: supervisor
+  sudo: yes
+  notify:
+    - start supervisord
+
+- name: Configure supervisord
   template: src=supervisord.conf.j2 dest={{ supervisor_dir }}/supervisord.conf
+  tags: supervisor
   sudo: yes
   notify:
     - restart supervisord
 
-- name: installing task {{ name }}
+- name: Create {{ supervisor_config_dir }} directory
+  file: path={{ supervisor_config_dir }} state=directory
+  tags: supervisor
+  sudo: yes
+
+- name: Installing task {{ name }}
   template: src=task.conf.j2 dest={{ supervisor_config_dir }}/{{ name }}.conf
+  tags: supervisor
   sudo: yes
+  notify:
+    - update supervised service
 
-- name: update supervisor
-  command: "{{ supervisorctl_command }} update"
-  sudo: yes
-
-- name: restart task {{ name }}
-  command: "{{ supervisorctl_command }} restart {{ name }}:*"
-  sudo: yes
+- debug: msg="See GUI at http://{{ inventory_hostname }}:{{ supervisor_inet_http_server }}"
+  when: supervisor_gui_enabled 
