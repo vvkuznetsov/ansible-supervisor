@@ -19,8 +19,10 @@ supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 [supervisorctl]
 serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
 
+{% if supervisor_inet_http_server %}
 [inet_http_server]
 port={{ supervisor_inet_http_server }}
+{% endif %}
 
 ; The [include] section can just contain the "files" setting.  This
 ; setting can list multiple files (separated by whitespace or

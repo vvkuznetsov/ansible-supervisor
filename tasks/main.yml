@@ -26,5 +26,11 @@
   notify:
     - update supervised service
 
+- name: Restart task {{ name }}
+  command: "{{ supervisorctl_command }} restart {{ full_name }}"
+  tags: supervisor
+  sudo: yes
+  when: restart_task
+
 - debug: msg="See GUI at http://{{ inventory_hostname }}:{{ supervisor_inet_http_server }}"
-  when: supervisor_gui_enabled 
+  when: supervisor_inet_http_server

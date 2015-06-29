@@ -1,0 +1,2 @@
+# Name of service that reflects situation with many processes (s:00, s:01, s:02)
+full_name: "{{ name }}{% if numprocs > 1 %}:*{% endif %}"

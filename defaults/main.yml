@@ -1,4 +1,3 @@
-supervisor_gui_enabled: yes
 supervisor_inet_http_server: 9001
 supervisor_dir: "/etc/supervisor"
 supervisor_config_dir: "{{ supervisor_dir }}/conf.d"
@@ -9,3 +8,5 @@ autostart: "true"
 user: "root"
 env_vars: {}
 numprocs: 1
+process_name: "%(process_num)02d"
+restart_task: false
