@@ -1,0 +1,11 @@
+language: python
+
+python: '2.7'
+
+install:
+  - pip install ansible
+
+script:
+  - ansible --version
+  - ansible-playbook -i localhost, --syntax-check supervisor-demo.yml
+  - ansible-playbook -i localhost, --connection=local --sudo -vvvv supervisor-demo.yml

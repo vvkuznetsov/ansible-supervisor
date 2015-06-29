@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  sudo: true
+  roles:
+    - { role: ./,
+        name: webserver,
+        command: python -m SimpleHTTPServer,
+        directory: /tmp,
+        user: root,
+        stopsignal: HUP
+    }

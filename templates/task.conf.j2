@@ -1,13 +1,21 @@
+; {{ ansible_managed }}
+
 [program:{{ name }}]
 command={{ command }}
-process_name={{ process_name }}
-directory={{ directory }}
 redirect_stderr={{ redirect_stderr }}
 autostart={{ autostart }}
 autorestart={{ autorestart }}
 user={{ user }}
 numprocs={{ numprocs }}
-{% if stopsignal %}stopsignal={{ stopsignal }}{% endif %}
+
+{% if numprocs > 1 %}process_name={{ process_name }}{% endif %}
+
+{% if directory is defined %}directory={{ directory }}{% endif %}
+
+{% if stopsignal is defined %}stopsignal={{ stopsignal }}{% endif %}
+
+{% if socket is defined %}socket={{ socket }}{% endif %}
+
 {% if env_vars|length > 0 %}
 environment={% for name, value in env_vars.iteritems() %}{{ name }}="{{ value }}"{% if not loop.last %},{% endif %}{% endfor %}
 {% endif %}

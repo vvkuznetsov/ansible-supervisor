@@ -1,4 +1,16 @@
 ---
-- name: update supervisord
+
+- name: start supervisord
+  service: name=supervisor state=started enabled=true
+  tags: supervisor
+  sudo: yes
+
+- name: restart supervisord
+  service: name=supervisor state=restarted
+  tags: supervisor
+  sudo: yes
+
+- name: update supervised service
   command: "{{ supervisorctl_command }} update {{ name }}"
+  tags: supervisor
   sudo: yes

@@ -1,8 +1,12 @@
-supervisor_config_dir: "/etc/supervisor/conf.d/"
+supervisor_inet_http_server: 9001
+supervisor_dir: "/etc/supervisor"
+supervisor_config_dir: "{{ supervisor_dir }}/conf.d"
 supervisorctl_command: "supervisorctl"
 redirect_stderr: "true"
 autorestart: "true"
 autostart: "true"
+user: "root"
 env_vars: {}
 numprocs: 1
-process_name: "%(program_name)s_%(process_num)02d"
+process_name: "%(process_num)02d"
+restart_task: false
